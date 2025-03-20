@@ -11,7 +11,7 @@ let loginPage: LoginPage;
 
 Given('I Connect on the dashboard', async function () {
     loginPage = new LoginPage(this.page);
-    await loginPage.goto("http://int.siteinfos.com/admin/");
+    await loginPage.goto("http://192.168.1.95:9091/admin/");
     //await loginPage.goto(config.baseUrl);
     //await loginPage.login(config.username, config.password);
     //await loginPage.login("testeur_recette", "testeur_qa_2");
