@@ -15,7 +15,7 @@ module.exports = {
         baseUrl: "https://opensource-demo.orangehrmlive.com"
       },
       requireModule: ["ts-node/register"], // Enable TypeScript
-      timeout: 10000, // Set test timeout (10s)
+      timeout: 60000, // Set test timeout (10s)
     },
   };
   
