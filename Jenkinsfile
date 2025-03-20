@@ -1,7 +1,13 @@
 pipeline {
     agent any
+
+    parameters {
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Choisir l\'environnement')
+        string(name: 'TAGS', defaultValue: '', description: 'Spécifier les tags Cucumber (ex: @critical,@smoke)')
+    }
+
     stages {
-        stage('build and install') {
+        stage('Build and Install') {
             agent {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.51.0-noble'
@@ -11,44 +17,36 @@ pipeline {
 
             steps {
                 script {
-                    
-                    sh 'npm ci'
-                    
+                    echo "Environnement sélectionné : ${params.ENVIRONMENT}"
+                    echo "Tags sélectionnés : ${params.TAGS}"
 
-                    sh 'npx cucumber-js'
-                    //sh 'allure generate ./allure-results -o ./allure-report'
+                    sh 'npm ci'
+
+                    // Exécution des tests avec des tags spécifiques et en fonction de l'environnement
+                    def cucumberCommand = "npx cucumber-js"
+
+                    if (params.TAGS?.trim()) {
+                        cucumberCommand += " --tags '${params.TAGS}'"
+                    }
+
+                    sh cucumberCommand
+                    
                     stash name: 'allure-results', includes: 'allure-results/*'
-                   // stash name: 'allure-results', includes: 'allure-results/**', allowEmpty: true
                 }
             }
         }
     }
+
     post {
         always {
-            //sh 'ls -al reports/' 
-
-            // cucumber buildStatus: 'UNSTABLE',
-            //         failedFeaturesNumber: 1,
-            //         failedScenariosNumber: 1,
-            //         skippedStepsNumber: 1,
-            //         failedStepsNumber: 1,
-            //         classifications: [
-            //                 [key: 'Commit', value: '<a href="${GERRIT_CHANGE_URL}">${GERRIT_PATCHSET_REVISION}</a>'],
-            //                 [key: 'Submitter', value: '${GERRIT_PATCHSET_UPLOADER_NAME}']
-            //         ],
-            //         reportTitle: 'My report',
-            //         fileIncludePattern: 'reports/cucumber-report.json', // Corrige le chemin d'inclusion
-            //         sortingMethod: 'ALPHABETICAL',
-            //         trendsLimit: 100
-           // unstash 'allure-results' //extract results
             script {
                 allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'allure-results']]
-            ])
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-results']]
+                ])
             }
         }
     }
