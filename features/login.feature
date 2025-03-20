@@ -9,13 +9,13 @@ Feature: Login
     @int
     Examples:
       | username              | password     | env                             |
-      | testeur_integration   | testeur_qa   | http://int.siteinfos.com/admin/ |
+      | testeur_integration   | testeur_qa   | http://192.168.1.95:9091/admin/ |
 
     @rec
     Examples:
       | username              | password     | env                             |
-      | testeur_recette       | testeur_qa_3 | http://rec.siteinfos.com/admin/ |
-      | testeur_recette_2     | testeur_qa_4 | http://rec.siteinfos.com/admin/ |
+      | testeur_recette       | testeur_qa_3 | http://192.168.1.95:9092/admin/ |
+      | testeur_recette_2     | testeur_qa_4 | http://192.168.1.95:9092/admin/ |
 
   @smoke @invalid @negative
   Scenario: Failed login with wrong credentials
@@ -26,9 +26,9 @@ Feature: Login
     @int
     Examples:
       | username                 | password     | env                             |
-      | testeur_integration_faux | testeur_qa   | http://int.siteinfos.com/admin/ |
+      | testeur_integration_faux | testeur_qa   | http://192.168.1.95:9092/admin/ |
 
     @rec
     Examples:
       | username                 | password     | env                             |
-      | testeur_integration_faux | testeur_qa   | http://rec.siteinfos.com/admin/ |
+      | testeur_integration_faux | testeur_qa   | http://192.168.1.95:9092/admin/ |
