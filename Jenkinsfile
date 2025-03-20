@@ -23,7 +23,7 @@ pipeline {
                     sh 'npm ci'
 
                     // Sélection de l’environnement avec --tags
-                    def cucumberCommand = "npx cucumber-js --tags '@${params.ENVIRONMENT}'"
+                    def cucumberCommand = "npx cucumber-js --tags '@${params.ENVIRONMENT}' --tags 'not @ignore'"
 
                     // Ajout des tags supplémentaires si fournis
                     if (params.TAGS?.trim()) {

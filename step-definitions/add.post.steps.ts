@@ -32,8 +32,7 @@ Given('I am on the dashboard', async function()  {
   // Write code here that turns the phrase above into concrete actions
   const randomSuffix = Math.floor(Math.random() * 10000); // Génère un nombre aléatoire entre 0 et 9999
   const titreAvecRandom = `${s}_${randomSuffix}`;
-  process.env.TITRE_RANDOM = titreAvecRandom;
-  
+
   await addPost.SaisirTitre(titreAvecRandom);
 })
 
