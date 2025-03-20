@@ -10,6 +10,7 @@ Feature: Login
     Examples:
       | username              | password     | env                             |
       | testeur_integration   | testeur_qa   | http://192.168.1.95:9091/admin/ |
+      | testeur_integration   | testeur_qa_2   | http://192.168.1.95:9091/admin/ |
 
     @rec
     Examples:
