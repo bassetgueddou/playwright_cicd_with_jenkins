@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'ENVIRONMENT', choices: ['int', 'rec'], description: 'Choisir l\'environnement de test')
-        string(name: 'TAGS', defaultValue: '@smoke', description: 'Spécifier les tags Cucumber (ex: @smoke,@valid)')
+        choice(name: 'ENVIRONMENT', choices: ['env1', 'env2', 'all', 'ignore'], description: 'Sélectionnez l\'environnement')
     }
 
     stages {
@@ -15,24 +14,23 @@ pipeline {
                 }
             }
 
-            steps {
+             steps {
                 script {
-                    echo "Environnement sélectionné : ${params.ENVIRONMENT}"
-                    echo "Tags sélectionnés : ${params.TAGS}"
-
+                    //sh 'mkdir -p reports'
                     sh 'npm ci'
-
-                    // Sélection de l’environnement avec --tags
-                    def cucumberCommand = "npx cucumber-js --tags '@${params.ENVIRONMENT}'"
-
-                    // Ajout des tags supplémentaires si fournis
-                    if (params.TAGS?.trim()) {
-                        cucumberCommand += " --tags '${params.TAGS}'"
+                    
+                    if (params.ENVIRONMENT == 'all') {
+                        sh 'npx cucumber-js --config cucumber.js --format allure-cucumberjs/reporter'
+                    } else if (params.ENVIRONMENT == 'ignore') {
+                        sh "TAGS='not @ignore' npx cucumber-js --config cucumber.js --format allure-cucumberjs/reporter"
                     }
-
-                    echo "Commande exécutée : ${cucumberCommand}"
-                    sh cucumberCommand
-
+                    else {
+                        sh "TAGS='@${params.ENVIRONMENT}' npx cucumber-js --config cucumber.js --format allure-cucumberjs/reporter"
+                    }
+                    //sh 'npx cucumber-js --format json:reports/cucumber-report.json'
+                    //sh "npx cucumber-js --tags @${params.ENVIRONMENT} --format json:reports/cucumber-report.json"
+                    //sh 'npx cucumber-js'
+                    //sh "TAGS='@${params.ENVIRONMENT}' npx cucumber-js --config cucumber.js"
                     stash name: 'allure-results', includes: 'allure-results/*'
                 }
             }
