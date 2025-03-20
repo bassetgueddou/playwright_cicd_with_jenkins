@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'ENVIRONMENT', choices: ['env1', 'env2', 'all', 'ignore'], description: 'Sélectionnez l\'environnement')
+        choice(name: 'ENVIRONMENT', choices: ['int', 'rec', 'all', 'ignore'], description: 'Sélectionnez l\'environnement')
     }
 
     stages {
