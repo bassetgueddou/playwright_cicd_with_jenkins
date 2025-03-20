@@ -35,9 +35,8 @@ When('I login with username {string} and password {string}', async function (use
 });
 
 Then('I should be redirected to the dashboard', async function () {
-  console.log(" Vérification de la présence du dashboard...");
   const isDashboardVisible = await loginPage.isDashboardVisible();
-  expect(isDashboardVisible).toBeTruthy();
+  expect(isDashboardVisible).toBe(true); 
   
 });
 

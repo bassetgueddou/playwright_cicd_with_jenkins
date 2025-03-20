@@ -17,7 +17,7 @@ export class LoginPage {
     password: () => this.page.locator('input[name="password"]'),
     submit: () => this.page.locator('input[type="submit"]'),
     errorMessage: () => this.page.locator('.errornote'),
-    dashboard: () => this.page.locator('.dashboard'),
+    dashboard: () => this.page.locator('#site-name')
   }
 
   async SaisirUsername (username : string){
@@ -40,7 +40,7 @@ export class LoginPage {
     this.elements.dashboard();
   }
   async isDashboardVisible(): Promise<boolean> {
-    return await this.page.isVisible('.dashboard');
+    return await this.elements.dashboard().isVisible();
   }
 
   async PostsListVisible(): Promise<boolean> {
