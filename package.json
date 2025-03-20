@@ -1,0 +1,23 @@
+{
+  "name": "playwright-cucumber-typescript-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "only": "npx cucumber-js  --format progress --publish --tags ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
+    "@playwright/test": "^1.51.1",
+    "allure-cucumberjs": "^3.2.0",
+    "allure-playwright": "^3.2.0",
+    "cross-env": "^7.0.3",
+    "playwright": "^1.50.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

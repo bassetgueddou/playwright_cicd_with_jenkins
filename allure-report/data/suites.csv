@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","4033","Failed login with wrong credentials","","Tue Mar 18 14:46:48 CET 2025","passed","Tue Mar 18 14:46:52 CET 2025","","","",""
+"","4144","Successful login","","Tue Mar 18 14:46:43 CET 2025","passed","Tue Mar 18 14:46:48 CET 2025","","","",""
+"","3900","Successful Click on Add Button","","Tue Mar 18 14:46:52 CET 2025","passed","Tue Mar 18 14:46:55 CET 2025","","","",""
+"","7636","Verify Add Post Page Elements","","Tue Mar 18 14:46:36 CET 2025","passed","Tue Mar 18 14:46:43 CET 2025","","","",""
